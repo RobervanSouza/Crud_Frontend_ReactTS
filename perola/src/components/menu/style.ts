@@ -74,6 +74,8 @@ export const MenuItem = styled.div<MenuItemStyled>`
     align-items: center;
     margin-left: 15px;
     position: relative;
+
+  
     ${active && MenuItemModifiers.active(theme)}
   `}
 `;

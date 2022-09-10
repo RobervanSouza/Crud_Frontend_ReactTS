@@ -1,17 +1,27 @@
 import Menu from "components/menu";
+import { DateTime } from "luxon";
 import { ReactComponent as Search } from "assets/icons/search.svg";
 import * as S from "./style";
+import { RoutePath } from "types/routes";
+import { navagationItens } from "data/navigation";
+import { ProductItemList } from "components/ProductItemList/style";
+import ProductItem from "components/ProductItem";
+import OrderDetails from "components/OrdeDetails";
 
 const Home = () => {
+  const dateDestination = DateTime.now().toLocaleString({...DateTime.DATE_SHORT, weekday: 'long' });
   return (
     <S.Home>
-        <Menu/>
+        <Menu
+        active={RoutePath.HOME}
+        navItens={navagationItens}
+        />
       <S.HomeContent>
         <header>
           <S.HomeHeaderDetails>
             <div>
                 <S.HomeHeaderDetailsLogo> Perola Negra Convites </S.HomeHeaderDetailsLogo>
-                <S.HomeHeaderDetailsDate> Aqui ficara a data </S.HomeHeaderDetailsDate> 
+                <S.HomeHeaderDetailsDate> {dateDestination} </S.HomeHeaderDetailsDate> 
             </div>
             <S.HomeHeaderDetailsSearch>
                 <Search />
@@ -21,10 +31,16 @@ const Home = () => {
         </header>
         <div>
             <S.HomeProductTitle> <b>Convite Perola Negra </b> </S.HomeProductTitle>
-            <S.HomeProductList> <p> Lista de produtos aqui</p> </S.HomeProductList>
+            <S.HomeProductList>
+              <ProductItemList>
+               <ProductItem/> 
+              </ProductItemList>
+            </S.HomeProductList>
         </div>
       </S.HomeContent>
-      <aside> <p>detalhes do pedido aqui </p></aside>
+      <aside> 
+        <OrderDetails/>
+      </aside>
     </S.Home>
   );
 };
